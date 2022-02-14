@@ -6,18 +6,6 @@
     android:background="@android:color/white"
     android:id="@+id/layout">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/layabox"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/logoView"
-        tools:scaleType="fitCenter"
-        android:layout_centerVertical="true"
-        android:adjustViewBounds="true"
-        android:maxWidth="200dp"
-        android:maxHeight="200dp" />
-
     <TextView
         android:text=""
         android:layout_width="wrap_content"
