@@ -1,5 +1,5 @@
 文档地址  
-httpldc2.layabox.comdoclanguage=zh&nav=zh-ts-6-2-0  
+https://ldc2.layabox.com/doc/?nav=zh-ts-6-2-0
 
 1.node 版本不要低于下面版本
 ```
