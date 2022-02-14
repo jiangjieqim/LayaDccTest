@@ -1,0 +1,3 @@
+/ic_launcher.png
+/myjson.json
+/myjson2.json
