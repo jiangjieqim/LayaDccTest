@@ -1,25 +1,25 @@
-ÎÄµµµØÖ·  
+ï»¿æ–‡æ¡£åœ°å€  
 httpldc2.layabox.comdoclanguage=zh&nav=zh-ts-6-2-0  
 
-1.node °æ±¾²»ÒªµÍÓÚÏÂÃæ°æ±¾
+1.node ç‰ˆæœ¬ä¸è¦ä½äºä¸‹é¢ç‰ˆæœ¬
 ```
 $ node -v
 v4.2.0
 ```
 
-2.°²×°layadcc  
+2.å®‰è£…layadcc  
 ```
 npm install -g layadcc
 ```
 
 ```
-layadcc ×ÊÔ´Ä¿Â¼ [options]
+layadcc èµ„æºç›®å½• [options]
 options:
-    -cache Éú³É×ÊÔ´°ü.
-    -lwr ÎÄ¼şÂ·¾¶È«²¿×ªÎªĞ¡Ğ´¡££¨Ò»°ã²»ĞèÒª£©
-    -url url Èç¹ûÒª´ò°ü×ÊÔ´µÄ»°£¬¶ÔÓ¦µÄurl.
-    -cout outpath ´ò°ü×ÊÔ´µÄÊä³öÄ¿Â¼£¬Èç¹û²»ÉèÖÃµÄ»°£¬¾ÍÊÇÔÚ×ÊÔ´Ä¿Â¼ÏÂ¡£
-ÀıÈç:
+    -cache ç”Ÿæˆèµ„æºåŒ….
+    -lwr æ–‡ä»¶è·¯å¾„å…¨éƒ¨è½¬ä¸ºå°å†™ã€‚ï¼ˆä¸€èˆ¬ä¸éœ€è¦ï¼‰
+    -url url å¦‚æœè¦æ‰“åŒ…èµ„æºçš„è¯ï¼Œå¯¹åº”çš„url.
+    -cout outpath æ‰“åŒ…èµ„æºçš„è¾“å‡ºç›®å½•ï¼Œå¦‚æœä¸è®¾ç½®çš„è¯ï¼Œå°±æ˜¯åœ¨èµ„æºç›®å½•ä¸‹ã€‚
+ä¾‹å¦‚:
    layadcc d:/game/wow -cache -url www.game.com
 ```
 
@@ -33,5 +33,5 @@ layadcc d:/LayaDccTest/res -cache -url http://192.168.2.107:8001/LayaDccTest/res
 
 https://www.233tw.com/laya/54553
 
-ÔÚLaya¹¹½¨appÊ±£¬URL²»ÒªÓÃÄ¬ÈÏµÄ£¬Ä¬ÈÏµÄÍøÖ·¾ÍÊÇÏÔÊ¾ÉÏÃæÕâ¸öÉ¨Âë½çÃæ¡£ ¸Ä³É×Ô¼ºµÄµØÖ·(http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html)  
+åœ¨Layaæ„å»ºappæ—¶ï¼ŒURLä¸è¦ç”¨é»˜è®¤çš„ï¼Œé»˜è®¤çš„ç½‘å€å°±æ˜¯æ˜¾ç¤ºä¸Šé¢è¿™ä¸ªæ‰«ç ç•Œé¢ã€‚ æ”¹æˆè‡ªå·±çš„åœ°å€(http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html)  
 ![](docimg/1.png)  
