@@ -1,6 +1,5 @@
 ﻿文档地址  
-httpldc2.layabox.comdoclanguage=zh&nav=zh-ts-6-2-0  
-
+`https://ldc2.layabox.com/doc/?language=zh&nav=zh-ts-6-2-0`
 1.node 版本不要低于下面版本
 ```
 $ node -v
@@ -22,7 +21,7 @@ options:
 例如:
    layadcc d:/game/wow -cache -url www.game.com
 ```
-
+将cache文件夹放到main/assets/cache位置
 
 ```
 http://192.168.2.107/LayaDccTest/res/
