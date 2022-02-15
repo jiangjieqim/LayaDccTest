@@ -1,0 +1,25 @@
+{
+	"version": "0.2.0",
+	"configurations": [ 
+
+		{	"name": "launch",
+			"type": "chrome",
+			// "request": "launch",
+			// "file": "${workspaceRoot}/bin/index.html",
+			"url": "http://127.0.0.1:8000/chesslaya/bin/index.html?alpha=1.0&step=1&filename=202112061125.pgn",
+			//http://127.0.0.1:8000/chesslaya/bin/index.html?filename=202112061125.pgn
+
+
+			// "runtimeExecutable": "${execPath}",
+			// "useBuildInServer": true,
+			// "sourceMaps": true,
+			// "webRoot": "${workspaceRoot}",
+			// "port": 9222,
+			// "fixedPort":false
+            // "runtimeExecutable":"${workspaceRoot}/bin/index.html",
+			"request": "launch",
+
+        }
+
+    ]
+}

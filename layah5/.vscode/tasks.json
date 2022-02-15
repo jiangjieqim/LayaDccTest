@@ -1,0 +1,13 @@
+// tasks.json
+{
+    // https://code.visualstudio.com/docs/editor/tasks
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "编译",
+            "type": "shell",
+            "command": "layacmd compile",
+            "problemMatcher": []
+        }
+    ]
+}
