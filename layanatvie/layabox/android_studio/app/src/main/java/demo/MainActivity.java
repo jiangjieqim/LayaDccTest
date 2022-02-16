@@ -15,9 +15,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -54,6 +57,20 @@ public class MainActivity extends Activity{
                         |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         |View.SYSTEM_UI_FLAG_FULLSCREEN
                         |View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//        Log.e("notch","has:"+Boolean.toString(JScreenTools.hasNotchInScreen(this)) );
+
+
+        ///////////////////////////////////////////////////////////////////////
+        Display defaultDisplay = getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        defaultDisplay.getSize(point);
+        int x = point.x;
+        int y = point.y;
+        Log.e("notch", "w = " + x + ",h = " + y+"h:"+getStatusBarHeight());
+
+
+
+
 
         JSBridge.mMainActivity = this;
         mSplashDialog = new SplashDialog(this);
@@ -64,13 +81,28 @@ public class MainActivity extends Activity{
         checkApkUpdate(this);
         //initEngine();
     }
+
+    /**
+     * 获取状态栏高度
+     * @return
+     */
+    public int getStatusBarHeight() {
+        int result = 0;
+        //获取状态栏高度的资源id
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
     public void initEngine()
     {
         mProxy = new RuntimeProxy(this);
         mPlugin = new GameEngine(this);
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize","false");
-        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html");
+        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.4.194:8002/index.html");
+        //  http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html
         mPlugin.game_plugin_init(3);
         View gameView = mPlugin.game_plugin_get_view();
         this.setContentView(gameView);
