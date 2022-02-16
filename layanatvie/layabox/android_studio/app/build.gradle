@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation files('libs\\tower-union-sdk-202108061911.jar')
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:appcompat-v7:22.1.1'
 }
