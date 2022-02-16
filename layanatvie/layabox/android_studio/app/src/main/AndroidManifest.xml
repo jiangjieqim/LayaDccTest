@@ -20,9 +20,10 @@
 	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 	
     <application
+        android:name="com.towersdk.union.android.TowerUnionApplication"
 		android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/layabox"
         android:label="@string/app_name"
 		android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
@@ -36,6 +37,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="TOWER_UNION_GAME_ID"
+            android:value="1100222" />
+        <meta-data
+            android:name="TOWER_UNION_APP_ID"
+            android:value="13000286" />
+        <meta-data android:name="TOWER_UNION_BASE_URL" android:value="http://api.review.tarenwang.net"/>
+
     </application>
 
 </manifest>

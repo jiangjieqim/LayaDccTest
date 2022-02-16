@@ -1,34 +1,30 @@
 package demo;
 import java.io.InputStream;
-import java.util.Timer;
-import java.util.TimerTask;
+
 import layaair.autoupdateversion.AutoUpdateAPK;
 import layaair.game.IMarket.IPlugin;
 import layaair.game.IMarket.IPluginRuntimeProxy;
 import layaair.game.Market.GameEngine;
 import layaair.game.config.config;
-import com.layabox.game.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.webkit.ValueCallback;
-import android.widget.Button;
-import android.widget.Toast;
+
+import com.towersdk.union.android.TowerUnionSDK;
 
 
 public class MainActivity extends Activity{
@@ -67,19 +63,16 @@ public class MainActivity extends Activity{
         int x = point.x;
         int y = point.y;
         Log.e("notch", "w = " + x + ",h = " + y+"h:"+getStatusBarHeight());
-
-
-
-
-
+        J_TrSDK.activity = this;
         JSBridge.mMainActivity = this;
         mSplashDialog = new SplashDialog(this);
         mSplashDialog.showSplash();
         /*
          * 如果不想使用更新流程，可以屏蔽checkApkUpdate函数，直接打开initEngine函数
          */
-        checkApkUpdate(this);
-        //initEngine();
+//        checkApkUpdate(this);
+        initEngine();
+        J_TrSDK.PlatformInit("");
     }
 
     /**
@@ -187,30 +180,52 @@ public class MainActivity extends Activity{
             }
         });
     }
-    public void onActivityResult(int requestCode, int resultCode,Intent intent) {
+    public void onActivityResult(int requestCode, int resultCode,Intent intent)
+    {
+        TowerUnionSDK.getInstance().onActivityResult(requestCode, resultCode, intent);
         if (requestCode == AR_CHECK_UPDATE) {
             checkApkUpdate(this);
         }
     }
     protected void onPause()
     {
+        TowerUnionSDK.getInstance().onPause();
         super.onPause();
         if(isLoad)mPlugin.game_plugin_onPause();
     }
     //------------------------------------------------------------------------------
     protected void onResume()
     {
+        TowerUnionSDK.getInstance().onResume();
         super.onResume();
         if(isLoad)mPlugin.game_plugin_onResume();
-        
     }
-    
+    public void onNewIntent(Intent newIntent) {
+        TowerUnionSDK.getInstance().onNewIntent(newIntent);
+        super.onNewIntent(newIntent);
+    }
+    protected void onStart() {
+        TowerUnionSDK.getInstance().onStart();
+        super.onStart();
+    }
+    public void onStop() {
+        TowerUnionSDK.getInstance().onStop();
+        super.onStop();
+    }
     protected void onDestroy()
     {
+        TowerUnionSDK.getInstance().onDestroy();
         super.onDestroy();
         if(isLoad)mPlugin.game_plugin_onDestory();
     }
-    
+    public void onRestart() {
+        TowerUnionSDK.getInstance().onRestart();
+        super.onRestart();
+    }
+    public void onBackPressed() {
+        TowerUnionSDK.getInstance().onBackPressed();
+        super.onBackPressed();
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
