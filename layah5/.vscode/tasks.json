@@ -7,7 +7,9 @@
             "label": "编译",
             "type": "shell",
             "command": "layacmd compile",
-            "problemMatcher": []
+            "problemMatcher": [
+                "$tsc"
+            ]
         }
     ]
 }
