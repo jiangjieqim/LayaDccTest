@@ -22,6 +22,18 @@ options:
    layadcc d:/game/wow -cache -url www.game.com
 ```
 将cache文件夹放到main/assets/cache位置
+在资源服务器根目录下面
+```
+layadcc .
+```
+会生成update较验文件
+
+allfiles.txt 所有的资源文件的相对路径。
+assetsid.txt 本次dcc统计的整个资源包的校验码。
+filetable.bin dcc主文件，里面是每个文件的校验值。
+filetable.txt 文本格式的dcc文件，除了前三行，每一行代表一个文件和对应的校验值，与allfiles.txt正好对应起来，即第4行对应的文件是allfiles.txt的第一行。
+filetable1.txt 这个文件不再使用。
+
 
 ```
 http://192.168.2.107/LayaDccTest/res/
@@ -29,6 +41,8 @@ http://192.168.2.107/LayaDccTest/res/
 layadcc d:/LayaDccTest/res -cache -url http://192.168.2.107:8001/LayaDccTest/res/
 
 ```
+
+打印 `found the file in the package:` 就表示对应的资源是从包中获取的，没有去网络下载，看到这个日志就表示打包资源成功。如果打的单机版，则所有资源都应该有这个打印，不应该有任何下载。
 
 https://www.233tw.com/laya/54553
 
