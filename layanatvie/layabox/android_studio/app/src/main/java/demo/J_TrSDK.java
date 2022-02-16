@@ -5,12 +5,51 @@ import android.util.Log;
 import com.towersdk.union.android.TowerUnionSDK;
 import com.towersdk.union.android.callback.ITowerUnionListener;
 import com.towersdk.union.android.constant.UnionSDKCallbackCode;
+import com.towersdk.union.android.entity.ProductInfo;
+import com.towersdk.union.android.entity.RoleInfo;
 import com.towersdk.union.android.entity.UserInfo;
+import com.towersdk.union.android.util.JJJson;
 
 import layaair.game.browser.ConchJNI;
 
 public class J_TrSDK {
     static MainActivity activity;
+
+    public static void PlatformRoleInfo(final String rolejson) {
+        Log.e("RoleInfo", rolejson);
+        JJJson RoleJson = new JJJson(rolejson);
+        RoleInfo roleinfo = new RoleInfo();
+        roleinfo.setSendtype(RoleJson.JsonString("sendtype"));
+        roleinfo.setRoleId(RoleJson.JsonString("roleid"));
+        roleinfo.setRoleName(RoleJson.JsonString("rolename"));
+        roleinfo.setRoleLevel(RoleJson.JsonString("rolelevel"));
+        roleinfo.setVipLevel(RoleJson.JsonString("viplevel"));
+        roleinfo.setClientId(RoleJson.JsonString("serverid"));
+        roleinfo.setClientName(RoleJson.JsonString("servername"));
+        roleinfo.setLaborunion(RoleJson.JsonString("laborunion"));
+        TowerUnionSDK.getInstance().sendRoleInfo(roleinfo);
+    }
+
+    public static void PlatformPay(final String payjson) {
+        Log.e("productInfo", payjson);
+        JJJson PayJson = new JJJson(payjson);
+        ProductInfo product = new ProductInfo();
+        product.setProductId(PayJson.JsonString("productId"));// 商品id
+        product.setProductName(PayJson.JsonString("productName"));// 商品名称
+        product.setProductDesc(PayJson.JsonString("productDesc"));// 商品描述
+        product.setPrice(PayJson.JsonString("price"));// 商品价格
+        product.setCoinNum(PayJson.JsonString("buyNum"));// 购买虚拟币数
+        product.setBuyNum(PayJson.JsonString("coinNum"));// 当前账户虚拟币余额数
+        product.setCurrency(PayJson.JsonString("currency"));// 虚拟币名称
+        product.setRate(PayJson.JsonString("rate"));// 单位人民币兑换比例
+        product.setExtension(PayJson.JsonString("extension"));// 扩展字段
+        // 例：当前账户有150钻石，需要5元购买50钻石则参数应填写
+        // productId="46548" productName="50钻石" productDesc="账户获得50钻石" price="5"
+        // buyNum="50" coinNum="150" currency="钻石" rate="10" extension=""
+        TowerUnionSDK.getInstance().pay(product);
+
+    }
+
     public static void PlatformInit(String initextension) {
         // 回调
         TowerUnionSDK.getInstance().setSDKListener(new ITowerUnionListener() {

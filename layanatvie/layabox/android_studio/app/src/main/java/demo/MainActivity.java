@@ -64,6 +64,7 @@ public class MainActivity extends Activity{
         int y = point.y;
         Log.e("notch", "w = " + x + ",h = " + y+"h:"+getStatusBarHeight());
         J_TrSDK.activity = this;
+        HlwBridge.mMainActivity = this;
         JSBridge.mMainActivity = this;
         mSplashDialog = new SplashDialog(this);
         mSplashDialog.showSplash();

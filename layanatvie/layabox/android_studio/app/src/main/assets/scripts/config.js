@@ -96,3 +96,39 @@ window.onLayaInitError=function(e)
 	console.log("onLayaInitError error=" + e);
 	alert("加载游戏失败，可能由于您的网络不稳定，请退出重进");
 }
+
+//注册葫芦娃接口
+window.tr = {};
+tr.bridge = PlatformClass.createClass("demo.HlwBridge");
+tr["c_login"] = function()
+{
+    tr.bridge.call("login");
+}
+tr["c_logout"] = function()
+{
+    tr.bridge.call("logout");
+}
+tr["c_sendinfo"]=function(value)
+{
+    tr.bridge.call("sendinfo",value);
+}
+tr["c_pay"]=function(value){
+    tr.bridge.call("pay",value);
+}
+tr["c_reload"]=function(value){
+    tr.bridge.call("reload",value);
+}
+tr["c_codeEnd"]=function(){
+    tr.bridge.call("codeEnd");
+}
+tr["c_isCodeInit"]=function(){
+    return tr.bridge.call("isCodeInit");
+}
+tr.bridge.call("resetInit");
+function isExitsFunction(funcName) { try { if (typeof (eval(funcName)) == "function") { return true; } } catch (e) { } return false; }
+var i = 0;
+function tr_check() {
+    i++;
+    console.log(i+">start check!!! "+tr["c_isCodeInit"]()); if (isExitsFunction("tr_init")) { window["tr_init"]() } else { setTimeout(() => { tr_check(); }, 1000); }
+}
+tr_check();
