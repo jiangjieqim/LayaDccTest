@@ -1,6 +1,10 @@
 package demo;
 
+import android.app.Dialog;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.towersdk.union.android.TowerUnionSDK;
 import com.towersdk.union.android.callback.ITowerUnionListener;
@@ -14,7 +18,23 @@ import layaair.game.browser.ConchJNI;
 
 public class J_TrSDK {
     static MainActivity activity;
+    public static void fullscreen(Window window){
 
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // 延伸显示区域到刘海
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        window.setAttributes(lp);
+        // 设置页面全屏显示
+        final View decorView = window.getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
+                |View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                |View.SYSTEM_UI_FLAG_FULLSCREEN
+                |View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    }
     public static void PlatformRoleInfo(final String rolejson) {
         Log.e("RoleInfo", rolejson);
         JJJson RoleJson = new JJJson(rolejson);

@@ -10,6 +10,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.layabox.game.R;
@@ -39,7 +40,7 @@ public class SplashDialog extends Dialog {
                         if (mIndex >= length) {
                             mIndex = 0;
                         }
-                        mTipsView.setText(mTips[mIndex] + "(" + mPercent + "%)");
+//                        mTipsView.setText(mTips[mIndex] + "(" + mPercent + "%)");
                         mIndex++;
                     }
                     mSplashHandler.sendEmptyMessageDelayed(0, 1000);
@@ -75,7 +76,7 @@ public class SplashDialog extends Dialog {
             if (mIndex >= mTips.length) {
                 mIndex = 0;
             }
-            mTipsView.setText(mTips[mIndex] + "(" + mPercent + "%)");
+//            mTipsView.setText(mTips[mIndex] + "(" + mPercent + "%)");
         }
 		if (mPercent == 100) {
             dismissSplash();
@@ -114,6 +115,7 @@ public class SplashDialog extends Dialog {
         setContentView(R.layout.splash_dialog);
         mTipsView = (TextView)findViewById(R.id.tipsView);
         mLayout = findViewById(R.id.layout);
+//        J_TrSDK.fullscreen(getWindow());
     }
 	@Override
     public boolean dispatchKeyEvent(KeyEvent event) {

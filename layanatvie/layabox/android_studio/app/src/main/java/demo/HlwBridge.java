@@ -1,6 +1,8 @@
 package demo;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -47,6 +49,12 @@ public class HlwBridge {
 //                mWebView.loadUrl(mURL);
 //            }
 //        });
-
+    }
+    public static void openurl(String urlValuel){
+        if(mMainActivity!=null) {
+            Uri uri = Uri.parse(urlValuel);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            mMainActivity.startActivity(intent);
+        }
     }
 }

@@ -18,7 +18,9 @@ public class JSBridge {
         m_Handler.post(
                 new Runnable() {
                     public void run() {
-                        MainActivity.mSplashDialog.dismissSplash();
+                        if(MainActivity.mSplashDialog!=null) {
+                            MainActivity.mSplashDialog.dismissSplash();
+                        }
                     }
                 });
     }
@@ -27,7 +29,9 @@ public class JSBridge {
         m_Handler.post(
                 new Runnable() {
                     public void run() {
-                        MainActivity.mSplashDialog.setFontColor(Color.parseColor(color));
+                        if(MainActivity.mSplashDialog!=null) {
+                            MainActivity.mSplashDialog.setFontColor(Color.parseColor(color));
+                        }
                     }
                 });
     }
@@ -41,7 +45,9 @@ public class JSBridge {
                             for (int i = 0; i < tips.length(); i++) {
                                 tipsArray[i] = tips.getString(i);
                             }
-                            MainActivity.mSplashDialog.setTips(tipsArray);
+                            if(MainActivity.mSplashDialog!=null) {
+                                MainActivity.mSplashDialog.setTips(tipsArray);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -53,7 +59,9 @@ public class JSBridge {
         m_Handler.post(
                 new Runnable() {
                     public void run() {
-                        MainActivity.mSplashDialog.setBackgroundColor(Color.parseColor(color));
+                        if(MainActivity.mSplashDialog!=null) {
+                            MainActivity.mSplashDialog.setBackgroundColor(Color.parseColor(color));
+                        }
                     }
                 });
     }
@@ -62,7 +70,9 @@ public class JSBridge {
         m_Handler.post(
                 new Runnable() {
                     public void run() {
-                        MainActivity.mSplashDialog.setPercent(percent);
+                        if(MainActivity.mSplashDialog!=null) {
+                            MainActivity.mSplashDialog.setPercent(percent);
+                        }
                     }
                 });
     }
@@ -71,7 +81,9 @@ public class JSBridge {
         m_Handler.post(
                 new Runnable() {
                     public void run() {
-                        MainActivity.mSplashDialog.showTextInfo(show);
+                        if(MainActivity.mSplashDialog!=null) {
+                            MainActivity.mSplashDialog.showTextInfo(show);
+                        }
                     }
                 });
     }

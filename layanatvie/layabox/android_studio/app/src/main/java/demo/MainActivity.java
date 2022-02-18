@@ -24,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ValueCallback;
 
+import com.layabox.game.R;
 import com.towersdk.union.android.TowerUnionSDK;
 
 
@@ -37,37 +38,28 @@ public class MainActivity extends Activity{
     @Override    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setContentView(R.layout.splash_dialog);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        J_TrSDK.fullscreen(getWindow());
 
-        // 延伸显示区域到刘海
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
-        getWindow().setAttributes(lp);
-        // 设置页面全屏显示
-        final View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
-                        |View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        |View.SYSTEM_UI_FLAG_FULLSCREEN
-                        |View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 //        Log.e("notch","has:"+Boolean.toString(JScreenTools.hasNotchInScreen(this)) );
 
 
         ///////////////////////////////////////////////////////////////////////
-        Display defaultDisplay = getWindowManager().getDefaultDisplay();
-        Point point = new Point();
-        defaultDisplay.getSize(point);
-        int x = point.x;
-        int y = point.y;
-        Log.e("notch", "w = " + x + ",h = " + y+"h:"+getStatusBarHeight());
+//        Display defaultDisplay = getWindowManager().getDefaultDisplay();
+//        Point point = new Point();
+//        defaultDisplay.getSize(point);
+//        int x = point.x;
+//        int y = point.y;
+//        Log.e("notch", "w = " + x + ",h = " + y+"h:"+getStatusBarHeight());
         J_TrSDK.activity = this;
         HlwBridge.mMainActivity = this;
         JSBridge.mMainActivity = this;
+
+
         mSplashDialog = new SplashDialog(this);
         mSplashDialog.showSplash();
+
         /*
          * 如果不想使用更新流程，可以屏蔽checkApkUpdate函数，直接打开initEngine函数
          */
@@ -95,7 +87,11 @@ public class MainActivity extends Activity{
         mPlugin = new GameEngine(this);
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize","false");
-        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.4.194:8002/index.html");
+        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.5.29:8002/index.html");
+//        "http://192.168.4.198:8002/index.html"
+        //index_native
+//        "https://test1.webgame.zhaouc.com/fq4_hulu/index_h5.html"
+        // "http://192.168.5.29:8002/index_native.html"
         //  http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html
         mPlugin.game_plugin_init(3);
         View gameView = mPlugin.game_plugin_get_view();
