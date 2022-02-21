@@ -48,3 +48,8 @@ https://www.233tw.com/laya/54553
 
 在Laya构建app时，URL不要用默认的，默认的网址就是显示上面这个扫码界面。 改成自己的地址(http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html)  
 ![](docimg/1.png)  
+
+生成资源cache的bat
+```
+layadcc D:/github/LayaDccTest/layah5/dccfold -cache -url https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html
+```
