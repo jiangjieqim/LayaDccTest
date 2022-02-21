@@ -25,6 +25,9 @@ public class J_TrSDK {
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         window.setAttributes(lp);
+        J_TrSDK.initFull(window);
+    }
+    public static void initFull(Window window){
         // 设置页面全屏显示
         final View decorView = window.getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -117,12 +120,15 @@ public class J_TrSDK {
                         ConchJNI.RunJS("tr_loginCallBack(\""+UID+"\",\""+Token+"\","+gameid +","+Channelid+");");
                         break;
                     case UnionSDKCallbackCode.CODE_LOGIN_FAIL:
+                        TowerUnionSDK.getInstance().login();
                         Log.e("TowerUnionLoginCallback", "登陆失败:" + result);
                         break;
                     case UnionSDKCallbackCode.CODE_LOGIN_CANCEL:
+                        TowerUnionSDK.getInstance().login();
                         Log.e("TowerUnionLoginCallback", "登陆取消:" + result);
                         break;
                     case UnionSDKCallbackCode.CODE_LOGIN_TIMEOUT:
+                        TowerUnionSDK.getInstance().login();
                         Log.e("TowerUnionLoginCallback", "登陆超时:" + result);
                         break;
                     default:

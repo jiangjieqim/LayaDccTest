@@ -110,6 +110,11 @@ window.onLayaInitError=function(e)
 
 //注册葫芦娃接口
 window.tr = {};
+if(window.innerWidth!=undefined && window.innerHeight!=undefined && window.innerHeight / window.innerWidth > 2){
+    window["OFFSET_Y"] = 78;
+    window["OFFSET_BOTTOM"] = 20;
+}
+//console.log("wh>>>"+ window.innerWidth + ","+window.innerHeight );
 tr.bridge = PlatformClass.createClass("demo.HlwBridge");
 tr.platform = "android";//设置平台信息
 tr["c_login"] = function()
@@ -144,6 +149,12 @@ function isExitsFunction(funcName) { try { if (typeof (eval(funcName)) == "funct
 var i = 0;
 function tr_check() {
     i++;
-    console.log(i+">start check!!! "+tr["c_isCodeInit"]()); if (isExitsFunction("tr_init")) { window["tr_init"]() } else { setTimeout(() => { tr_check(); }, 1000); }
+    console.log(i+">start check!!! "+tr["c_isCodeInit"]());
+    if (isExitsFunction("tr_init")) {
+//        console.log("this is tr_init!");
+        window["tr_init"]()
+    } else {
+            setTimeout(() => { tr_check(); }, 1000);
+    }
 }
 tr_check();

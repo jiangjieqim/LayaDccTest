@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ValueCallback;
+import android.widget.Button;
 
 import com.layabox.game.R;
 import com.towersdk.union.android.TowerUnionSDK;
@@ -44,7 +46,6 @@ public class MainActivity extends Activity{
 
 //        Log.e("notch","has:"+Boolean.toString(JScreenTools.hasNotchInScreen(this)) );
 
-
         ///////////////////////////////////////////////////////////////////////
 //        Display defaultDisplay = getWindowManager().getDefaultDisplay();
 //        Point point = new Point();
@@ -59,6 +60,8 @@ public class MainActivity extends Activity{
 
         mSplashDialog = new SplashDialog(this);
         mSplashDialog.showSplash();
+        J_TrSDK.fullscreen(mSplashDialog.getWindow());
+
 
         /*
          * 如果不想使用更新流程，可以屏蔽checkApkUpdate函数，直接打开initEngine函数
@@ -66,8 +69,23 @@ public class MainActivity extends Activity{
 //        checkApkUpdate(this);
         initEngine();
         J_TrSDK.PlatformInit("");
+//        hideBottomUIMenu();
     }
 
+    protected void hideBottomUIMenu() {
+        //隐藏虚拟按键，并且全屏
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+
+        }
+    }
     /**
      * 获取状态栏高度
      * @return
@@ -87,8 +105,9 @@ public class MainActivity extends Activity{
         mPlugin = new GameEngine(this);
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize","false");
-        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.5.29:8002/index.html");
+        mPlugin.game_plugin_set_option("gameUrl", "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html");
 //        "http://192.168.4.198:8002/index.html"
+        //      "http://192.168.5.20:8002/index.html"
         //index_native
 //        "https://test1.webgame.zhaouc.com/fq4_hulu/index_h5.html"
         // "http://192.168.5.29:8002/index_native.html"
