@@ -53,3 +53,16 @@ https://www.233tw.com/laya/54553
 ```
 layadcc D:/github/LayaDccTest/layah5/dccfold -cache -url https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html
 ```
+**LayaNative设置多种字体**
+```
+let ttfloader:Laya.TTFLoader=new Laya.TTFLoader();
+ttfloader.fontName="myfont1";
+ttfloader.load("comic.ttf");
+ttfloader.complete=Laya.Handler.create(this,()=>{
+        let txt:Laya.Text=new Laya.Text();
+        txt.text="我是新的字体CBA";
+            txt.font="comic";
+        txt.fontSize=64;
+        Laya.stage.addChild(txt);
+})
+```
