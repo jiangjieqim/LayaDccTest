@@ -1,5 +1,7 @@
 package demo;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 
 import layaair.autoupdateversion.AutoUpdateAPK;
 import layaair.game.IMarket.IPlugin;
@@ -13,7 +15,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +36,8 @@ import com.layabox.game.R;
 import com.towersdk.union.android.TowerUnionSDK;
 
 
+
+
 public class MainActivity extends Activity{
     public static final int AR_CHECK_UPDATE = 1;
     private IPlugin mPlugin = null;
@@ -37,6 +45,7 @@ public class MainActivity extends Activity{
     boolean isLoad=false;
     boolean isExit=false;
     public static SplashDialog mSplashDialog;
+//    private String gameURL;
     @Override    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,12 +110,47 @@ public class MainActivity extends Activity{
     }
     public void initEngine()
     {
+
+
+
+//在application应用<meta-data>元素。
+//        ApplicationInfo appInfo = this.getPackageManager().getApplicationInfo(getPackageName(),PackageManager.GET_META_DATA);
+//        appInfo.metaData.getString("URL");
+//        ApplicationInfo appInfo = this.getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+
+//        String msg=appInfo.metaData.getString("data_Name");
+//        Log.d(TAG, " msg == " + msg );
+
         mProxy = new RuntimeProxy(this);
         mPlugin = new GameEngine(this);
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize","false");
-        mPlugin.game_plugin_set_option("gameUrl", "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html");
-//        "http://192.168.4.198:8002/index.html"
+//        mPlugin.game_plugin_set_option("gameUrl", "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html");
+//        mPlugin.game_plugin_set_option("gameUrl", "https://test1.webgame.zhaouc.com/fq4_hulu/ntest.html");//用于输入账号的
+
+//        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.4.190:8002/index_native_test.html");
+
+//        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.4.190:8002/index.html");
+
+//        "http://192.168.4.119:8002/index_native_test.html"
+//        mPlugin.game_plugin_set_option("gameUrl", "http://192.168.4.119:8002/index_native.html");
+
+        InputStream inputStream = getClass().getResourceAsStream("/assets/config.ini");
+        Properties _properties =  new Properties();
+        if(inputStream!=null) {
+            try {
+                _properties.load(inputStream);
+                String url = _properties.getProperty("GameUrl");
+                mPlugin.game_plugin_set_option("gameUrl",url);
+                Log.e("gameURL", "["+url+"]");
+                inputStream.close();
+            } catch (IOException var2) {
+                var2.printStackTrace();
+                return;
+            }
+        }
+
+
         //      "http://192.168.5.20:8002/index.html"
         //index_native
 //        "https://test1.webgame.zhaouc.com/fq4_hulu/index_h5.html"
