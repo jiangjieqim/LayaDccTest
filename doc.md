@@ -77,6 +77,9 @@ ttfloader.complete=Laya.Handler.create(this,()=>{
 报错2.
 2022-02-22 11:07:32.967 24957-24983/com.kafeiniu.hlw E/LayaBox: 错误：图片大小超过2048，无法处理！！！
 
-**闪退的bug**
+**BUG1 闪退**  
 原因1:drawToCanvas在原生模式(native)下存在内存泄露的BUG
 https://ask.layabox.com/question/41587
+
+**BUG2 Sprite的render接口在native失效**  
+避免用super.render()这个接口
