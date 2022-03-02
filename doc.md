@@ -83,3 +83,14 @@ https://ask.layabox.com/question/41587
 
 **BUG2 Sprite的render接口在native失效**  
 避免用super.render()这个接口
+
+**Laya native版本的websocket有粘包的BUG,要手动把拆开的包组合在一起**
+
+native websocket收到buffer长度被截取 不用native 网页或者直接包app都是正常的,单个包不能超过4096 bytes 解决方案 自行组合协议包
+定义协议头结构
+```
+协议号      Uint16
+协议包长度  Uint32
+协议体      ...
+```
+通过协议包长度来判断是否需要处理粘包操作
