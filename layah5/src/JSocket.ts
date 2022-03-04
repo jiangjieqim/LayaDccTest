@@ -34,11 +34,11 @@ namespace app{
         }
 
         protected doCallBack(byte: Laya.Byte): void {
-            let rl = 0;
+            // let rl = 0;
             // rl = this.getRealLen(byte);
             byte.pos = 0;
             let cmd: number = byte.getUint16();
-            console.log(Laya.timer.currFrame+"===========>协议号:0x" + cmd.toString(16) + ",协议包长:" + byte.length /*+ "真实长度:" + rl*/);
+            // console.log(Laya.timer.currFrame+"===========>协议号:0x" + cmd.toString(16) + ",协议包长:" + byte.length /*+ "真实长度:" + rl*/);
             // this.index = 0;
             this.callBack(cmd, byte);
         }
