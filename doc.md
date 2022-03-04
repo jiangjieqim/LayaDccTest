@@ -83,7 +83,8 @@ ttfloader.complete=Laya.Handler.create(this,()=>{
 
 **BUG1 闪退**  
 原因1:drawToCanvas在原生模式(native)下存在内存泄露的BUG
-https://ask.layabox.com/question/41587
+https://ask.layabox.com/question/41587  
+不要使用该接口
 
 **BUG2 Sprite的render接口在native失效**  
 避免用super.render()这个接口
