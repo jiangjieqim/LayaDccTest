@@ -1,5 +1,5 @@
 ﻿文档地址  
-`https://ldc2.layabox.com/doc/?language=zh&nav=zh-ts-6-2-0`
+https://ldc2.layabox.com/doc/?language=zh&nav=zh-ts-6-2-0  
 1.node 版本不要低于下面版本
 ```
 $ node -v
@@ -48,11 +48,14 @@ https://www.233tw.com/laya/54553
 
 在Laya构建app时，URL不要用默认的，默认的网址就是显示上面这个扫码界面。 改成自己的地址(http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html)  
 ![](docimg/1.png)  
-
+appConfig.js资源路径
+```
+basePath:"https://test1.webgame.zhaouc.com/tr2_hulu/assets/",  //assets路径、cdn路径
+```
 生成资源cache的bat
-```
+
 layadcc D:/github/LayaDccTest/layah5/dccfold -cache -url https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html
-```
+
 **LayaNative设置多种字体**
 ```
 let ttfloader:Laya.TTFLoader=new Laya.TTFLoader();
@@ -70,6 +73,7 @@ ttfloader.complete=Laya.Handler.create(this,()=>{
 **android studio连接手机**
 [https://www.cnblogs.com/oreox/p/10662066.html]
 
+# Laya 1.7.17版本的Native相关BUG
 
 报错1.
 `Waring! _loadFromAssets returns incorrect contents! what happened!`
@@ -94,3 +98,31 @@ native websocket收到buffer长度被截取 不用native 网页或者直接包ap
 协议体      ...
 ```
 通过协议包长度来判断是否需要处理粘包操作
+
+
+**BUG4 接口getPixels的Native环境下没有检查拾取不到像素的情况**  
+重构如下
+```
+//重构Texture的getPixels的方法
+Laya.Texture.prototype.getPixels=function(x,y,width,height){
+    if (Laya.Render.isConchApp){
+        var temp=this.bitmap;
+        if (temp.source && temp.source.getImageData){
+            var arraybuffer=temp.source.getImageData(x,y,width,height);
+            if(arraybuffer){
+                var tUint8Array=new Uint8Array(arraybuffer);
+                return /*__JS__ */Array['from'](tUint8Array);
+            }
+        }
+        return null;
+        }else if (Laya.Render.isWebGL){
+        return Laya.RunDriver.getTexturePixels(this,x,y,width,height);
+        }else {
+        Laya.Browser.canvas.size(width,height);
+        Laya.Browser.canvas.clear();
+        Laya.Browser.context.drawTexture(this,-x,-y,this.width,this.height,0,0);
+        var info=Laya.Browser.context.getImageData(0,0,width,height);
+    }
+    return info.data;
+}
+```
