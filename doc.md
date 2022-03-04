@@ -88,7 +88,7 @@ https://ask.layabox.com/question/41587
 **BUG2 Sprite的render接口在native失效**  
 避免用super.render()这个接口
 
-**Laya native版本的websocket有粘包的BUG,要手动把拆开的包组合在一起**
+**BUG3 Laya native版本的websocket有粘包的BUG,要手动把拆开的包组合在一起**
 
 native websocket收到buffer长度被截取 不用native 网页或者直接包app都是正常的,单个包不能超过4096 bytes 解决方案 自行组合协议包
 定义协议头结构
@@ -101,9 +101,7 @@ native websocket收到buffer长度被截取 不用native 网页或者直接包ap
 
 
 **BUG4 接口getPixels的Native环境下没有检查拾取不到像素的情况**  
-重构如下
-
-`var arraybuffer=temp.source.getImageData(x,y,width,height);`
+代码`var arraybuffer=temp.source.getImageData(x,y,width,height);`
 在拾取不到像素的时候,这个arraybuffer可能为null引起的
 
 ```
