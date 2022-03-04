@@ -102,6 +102,10 @@ native websocket收到buffer长度被截取 不用native 网页或者直接包ap
 
 **BUG4 接口getPixels的Native环境下没有检查拾取不到像素的情况**  
 重构如下
+
+`var arraybuffer=temp.source.getImageData(x,y,width,height);`
+在拾取不到像素的时候,这个arraybuffer可能为null引起的
+
 ```
 //重构Texture的getPixels的方法
 Laya.Texture.prototype.getPixels=function(x,y,width,height){
