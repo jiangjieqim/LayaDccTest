@@ -129,3 +129,6 @@ Laya.Texture.prototype.getPixels=function(x,y,width,height){
     return info.data;
 }
 ```
+BUG5  
+![](docimg/img1.jpg)  
+Native模式Particle2D不支持。不使用粒子即可.
