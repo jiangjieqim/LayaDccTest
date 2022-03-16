@@ -2,24 +2,38 @@
 	"version": "0.2.0",
 	"configurations": [ 
 
-		{	"name": "launch",
-			"type": "chrome",
-			// "request": "launch",
-			// "file": "${workspaceRoot}/bin/index.html",
-			"url": "http://127.0.0.1:8000/chesslaya/bin/index.html?alpha=1.0&step=1&filename=202112061125.pgn",
-			//http://127.0.0.1:8000/chesslaya/bin/index.html?filename=202112061125.pgn
+		// {	"name": "launch",
+		// 	"type": "chrome",
+		// 	// "request": "launch",
+		// 	// "file": "${workspaceRoot}/bin/index.html",
+		// 	// "url": "http://127.0.0.1:8000/chesslaya/bin/index.html?alpha=1.0&step=1&filename=202112061125.pgn",
+		// 	//http://127.0.0.1:8000/chesslaya/bin/index.html?filename=202112061125.pgn
+		// 	// "url": "http://127.0.0.1:8002/index.html",
+		// 	"file": "${workspaceFolder}/index.html",
+		// 	// "url": "http://localhost:8080",
 
 
-			// "runtimeExecutable": "${execPath}",
-			// "useBuildInServer": true,
-			// "sourceMaps": true,
-			// "webRoot": "${workspaceRoot}",
-			// "port": 9222,
-			// "fixedPort":false
-            // "runtimeExecutable":"${workspaceRoot}/bin/index.html",
+		// 	// "runtimeExecutable": "${execPath}",
+		// 	// "useBuildInServer": true,
+		// 	// "sourceMaps": true,
+		// 	// "webRoot": "${workspaceRoot}",
+		// 	// "port": 9222,
+		// 	// "fixedPort":false
+        //     // "runtimeExecutable":"${workspaceRoot}/bin/index.html",
+		// 	"request": "launch",
+		// 	// "port": 9222,
+		// 	// "runtimeExecutable": "C://Users//Administrator//AppData//Local//Google//Chrome//Application//chrome.exe",
+		// 	"sourceMaps": true,
+		// 	"webRoot": "${workspaceFolder}"
+        // }
+
+		{
+			"name": "Launch",
+			"type" :"chrome",
 			"request": "launch",
-
-        }
-
+			// "url": "http://192.168.4.76:8002/index.html",
+			"url": "${workspaceFolder}/bin/index.html",
+			"webRoot": "${workspaceFolder}/bin"
+		}
     ]
 }
