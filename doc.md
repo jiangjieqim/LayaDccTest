@@ -46,6 +46,17 @@ layadcc d:/LayaDccTest/res -cache -url http://192.168.2.107:8001/LayaDccTest/res
 
 https://www.233tw.com/laya/54553
 
+# node build.js命令行生成替换DCC的资源的APK包
+```
+1.将需要layadcc的文件放在\\layah5\\ddcfold目录下
+    
+2.
+cd D:\github\LayaDccTest
+node build.js "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html" 
+
+apk生成在build.js同级目录
+```
+
 在Laya构建app时，URL不要用默认的，默认的网址就是显示上面这个扫码界面。 改成自己的地址(http://192.168.2.107:8001/LayaDccTest/layah5/bin/index.html)  
 ![](docimg/1.png)  
 appConfig.js资源路径
