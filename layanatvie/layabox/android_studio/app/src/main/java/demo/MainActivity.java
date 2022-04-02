@@ -50,6 +50,7 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.splash_dialog);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//设置为不息屏的
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         J_TrSDK.fullscreen(getWindow());
 
