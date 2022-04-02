@@ -1,5 +1,18 @@
 namespace app{
     
+    /**
+     * 使用方法
+     *  
+        socket.on(Laya.Event.MESSAGE,socket,onData);
+        let ms new MJSocketParse(Protocol.onMessage);
+        function onData(data:ArrayBuffer){
+            byteResp.clear();
+            byteResp.writeArrayBuffer(data,0,data.byteLength)
+            byteResp.pos =0;
+            ms.run(byteResp);
+        }
+     * 
+     */
     export class MJSocketParse{
         private callBack:Function;
         private stickyLen:number = 0;//粘包总包长

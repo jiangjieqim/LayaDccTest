@@ -100,6 +100,18 @@ native websocket收到buffer长度被截取 不用native 网页或者直接包ap
 ```
 通过协议包长度来判断是否需要处理粘包操作
 
+组件路径`github\LayaDccTest\layah5\src\JSocket.ts`  
+使用案例:
+```
+socket.on(Laya.Event.MESSAGE,socket,onData);
+let ms new MJSocketParse(Protocol.onMessage);
+function onData(data:ArrayBuffer){
+    byteResp.clear();
+    byteResp.writeArrayBuffer(data,0,data.byteLength)
+    byteResp.pos =0;
+    ms.run(byteResp);
+}
+```
 
 **BUG4 接口getPixels的Native环境下没有检查拾取不到像素的情况**  
 代码`var arraybuffer=temp.source.getImageData(x,y,width,height);`
