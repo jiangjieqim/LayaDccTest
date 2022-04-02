@@ -48,8 +48,7 @@ https://www.233tw.com/laya/54553
 
 # node build.js命令行生成替换DCC的资源的APK包
 ```
-1.将需要layadcc的文件放在\\layah5\\ddcfold目录下
-    
+1.将需要layadcc的文件放在D:\github\LayaDccTest\layah5\ddcfold目录下
 2.
 cd D:\github\LayaDccTest
 node build.js "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html" 
