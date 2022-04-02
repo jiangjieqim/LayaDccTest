@@ -14,10 +14,21 @@ android {
     sourceSets.main{
         jniLibs.srcDir 'libs'
     }
+
+    signingConfigs{
+        release {
+            storeFile file("tr.jks")
+            storePassword "123456"
+            keyPassword "123456"
+            keyAlias "key0"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled false //是否代码混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -26,5 +37,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation files('libs\\tower-union-sdk-202108061911.jar')
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:22.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 }
