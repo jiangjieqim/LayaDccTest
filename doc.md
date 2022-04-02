@@ -132,3 +132,9 @@ Laya.Texture.prototype.getPixels=function(x,y,width,height){
 BUG5  
 ![](docimg/img1.jpg)  
 Native模式Particle2D不支持。不使用粒子即可.
+
+# 命令行编译
+配置命令行参考[https://github.com/jiangjieqim/jdoc/blob/master/android_studio%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95.md]
+
+命令行脚本编译路径:  
+D:\github\LayaDccTest\layanatvie\layabox\android_studio\app\编译.bat ,编译会生成在..\app\build\outputs\apk\release\app-release.apk这里
