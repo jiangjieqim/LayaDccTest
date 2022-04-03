@@ -5,15 +5,7 @@
     2.node build.js "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html"
     apk生成在build.js同级目录
  */
-
-
-
 let fs=  require("fs");
-// const { resolve } = require('path')
-
-// var process = require('child_process');
-// console.log(process.argv);
-
 var child = require('child_process');
 
 function delFile(path, reservePath) {
