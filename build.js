@@ -37,6 +37,24 @@ function delFile(path, reservePath) {
     }
 }
 
+function replaceConfig(curPath,url) {
+    let mypath = `${curPath}\\layanatvie\\layabox\\android_studio\\app\\src\\main\\assets\\config.ini`;
+    let configini = fs.readFileSync(mypath, "utf-8");
+    let arr = configini.split("\n");
+    let newstr = "";
+    for (let i = 0; i < arr.length; i++) {
+        let s = arr[i];
+        if (s.indexOf("GameUrl=") != -1) {
+            // console.log(s);
+        }else{
+            newstr+=s+"\n";
+        }
+    }
+    newstr+="GameUrl="+url;
+    // console.log(newstr);
+    fs.writeFileSync(mypath,newstr,"utf-8");
+}
+
 if(process.argv.length >= 3){
     let url = process.argv[2];
     // 返回运行文件所在的目录
@@ -55,14 +73,11 @@ if(process.argv.length >= 3){
     console.log(buf.toString());
     // console.log(__dirname);
     
+    //修改config.ini
+    replaceConfig(curPath,url);
+
+    //生成apk文件
     console.log(child.execSync("生成apk.bat").toString());
-
-    // let c2 = `copy "${curPath}\\layanatvie\\layabox\\android_studio\\app\\build\\\outputs\\\apk\\\release\\app-release.apk" "${curPath}\\my232.apk"`;
-//    console.log(child.execSync());
-    // console.log(c2);
-
-
-    // console.log();
 
     let sub =  fs.readFileSync(`${curPath}\\layanatvie\\layabox\\android_studio\\app\\build\\outputs\\apk\\release\\app-release.apk`);
     // console.log(sub.byteLength);
