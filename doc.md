@@ -162,3 +162,9 @@ Native模式Particle2D不支持。不使用粒子即可.
 
 命令行脚本编译路径:  
 D:\github\LayaDccTest\layanatvie\layabox\android_studio\app\编译.bat ,编译会生成在..\app\build\outputs\apk\release\app-release.apk这里
+
+*命令行第2种方式打包.layaddc&生成apk.bat*  
+将需要layadcc的文件放在\\layah5\\ddcfold目录下
+```
+node build.js "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html"
+```
