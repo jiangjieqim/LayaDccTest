@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.towersdk.union.android.TowerUnionSDK;
 
@@ -55,6 +56,17 @@ public class HlwBridge {
             Uri uri = Uri.parse(urlValuel);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             mMainActivity.startActivity(intent);
+        }
+    }
+
+    /**
+     * 上报埋点
+     * @param type
+     */
+    public static void sendDevicePointCp(String type){
+        if(mMainActivity!=null) {
+            Log.e("sendDevicePointCp", "sendDevicePointCp:"+type);
+            TowerUnionSDK.getInstance().sendDevicePointCp(mMainActivity,type);
         }
     }
 }

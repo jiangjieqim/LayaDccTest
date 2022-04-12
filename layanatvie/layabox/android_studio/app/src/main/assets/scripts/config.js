@@ -144,6 +144,9 @@ tr["c_isCodeInit"]=function(){
 tr["c_openurl"]=function(url){
     tr.bridge.call("openurl",url);
 }
+tr["c_sendDevicePointCp"]=function(type){
+    tr.bridge.call("sendDevicePointCp",type);
+}
 tr.bridge.call("resetInit");
 function isExitsFunction(funcName) { try { if (typeof (eval(funcName)) == "function") { return true; } } catch (e) { } return false; }
 var i = 0;
