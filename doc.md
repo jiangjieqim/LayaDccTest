@@ -168,3 +168,27 @@ D:\github\LayaDccTest\layanatvie\layabox\android_studio\app\编译.bat ,编译�
 ```
 node build.js "https://test1.webgame.zhaouc.com/fq4_hulu/index_native.html"
 ```
+命令行报错解决
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring project ':app'.
+> SDK location not found. Define location with sdk.dir in the local.properties file or with an ANDROID_HOME environment variable.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+```
+配置SDK目录D:\github\LayaDccTest\layanatvie\layabox\android_studio\local.properties
+```
+## This file must *NOT* be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+#
+# Location of the SDK. This is only used by Gradle.
+# For customization when using a Version Control System, please read the
+# header note.
+#Fri May 20 11:22:18 CST 2022
+sdk.dir=D\:\\android\\sdk
+```
