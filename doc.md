@@ -202,3 +202,8 @@ sdk.dir=D\:\\android\\sdk
 移除可视区域Laya.Pool.recover回收
  ![](docimg/img4.jpg)  
         
+# 分包加载解决方案
+登录前置模块用jslist.json定义起来，之后编译发布代码(`改写layacmd publish`)将release切成2个包。
+这样首个包比较小。这样不用等全部代码全部加载完成之后再出登录界面，体验会好很多。
+
+# 同图集适当合并排序到一层减少drawcall
