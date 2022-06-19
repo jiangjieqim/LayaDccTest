@@ -192,3 +192,13 @@ Run with --stacktrace option to get the stack trace. Run with --info or --debug 
 #Fri May 20 11:22:18 CST 2022
 sdk.dir=D\:\\android\\sdk
 ```
+# xbin文件
+ ![](docimg/img3.jpg)  
+
+# 自定义非规则的排版list.JListCustom
+参考类`docimg/list.JListCustom.js`  
+当容器内的对象数量超多，会卡顿。  
+解决方案:用Panel实现,Panel进行滑动时，只显示可是区域在舞台,
+移除可视区域Laya.Pool.recover回收
+ ![](docimg/img4.jpg)  
+        
