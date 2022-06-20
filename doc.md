@@ -1,4 +1,47 @@
-﻿文档地址  
+﻿# 内存偏小的机型处理方案
+问题:GC引发图集重新加载，Texture闪烁问题  
+`策略调整autoReleaseMaxSize值`
+```
+laya.core.js
+/**
+*Config 用于配置一些全局参数。如需更改，请在初始化引擎之前设置。
+*/
+//class Config
+var Config=(function(){
+	function Config(){}
+	__class(Config,'Config');
+	Config.WebGLTextCacheCount=500;
+	Config.atlasEnable=false;
+	Config.showCanvasMark=false;
+	Config.animationInterval=50;
+	Config.isAntialias=false;
+	Config.isAlpha=false;
+	Config.premultipliedAlpha=true;
+	Config.isStencil=true;
+	Config.preserveDrawingBuffer=false;
+	return Config;
+})()
+```
+
+```
+ResourceManager
+/** 是否启用自动释放机制。*/
+autoRelease: boolean;
+
+/**自动释放机制的内存触发上限,以字节为单位。*/
+autoReleaseMaxSize: number;
+```
+laya.core.js 6895
+```
+/**
+*垃圾回收。
+*@param reserveSize 保留尺寸。
+*/
+__proto.garbageCollection=function(reserveSize){
+```
+
+
+文档地址  
 https://ldc2.layabox.com/doc/?language=zh&nav=zh-ts-6-2-0  
 1.node 版本不要低于下面版本
 ```
@@ -136,7 +179,7 @@ Laya.Texture.prototype.getPixels=function(x,y,width,height){
         var temp=this.bitmap;
         if (temp.source && temp.source.getImageData){
             var arraybuffer=temp.source.getImageData(x,y,width,height);
-            if(arraybuffer){
+            if(arraybuffer){//这里规避空指针异常
                 var tUint8Array=new Uint8Array(arraybuffer);
                 return /*__JS__ */Array['from'](tUint8Array);
             }
@@ -192,6 +235,76 @@ Run with --stacktrace option to get the stack trace. Run with --info or --debug 
 #Fri May 20 11:22:18 CST 2022
 sdk.dir=D\:\\android\\sdk
 ```
+# js压缩混淆 
+安装 npm install uglify-js -g
+```
+uglifyjs code.js -m -o code.min.js
+```
+```
+  -h, --help                  列出使用指南。
+                              `--help options` 获取可用选项的详情。
+  -V, --version               打印版本号。
+  -p, --parse <options>       指定解析器配置选项:
+                              `acorn`  使用 Acorn 来解析。
+                              `bare_returns`  允许在函数外return。
+                                              在压缩CommonJS模块或`.user.js `引擎调用被同步执行函数包裹的用户脚本 时会用到。
+                              `expression`  不是解析文件，二是解析一段表达式 (例如解析JSON).
+                              `spidermonkey`  输入文件是 SpiderMonkey
+                                              AST 格式 (JSON).
+  -c, --compress [options]    启用压缩（true/false）/指定压缩配置:
+                              `pure_funcs`  传一个函数名的列表，当这些函数返回值没被利用时，该函数会被安全移除。
+  -m, --mangle [options]       启用混淆（true/false）/指定混淆配置:
+                              `reserved`  不被混淆的名字列表。
+  --mangle-props [options]    混淆属性/指定压缩配置:
+                              `builtins`  混淆那些与标准JS全局变量重复的名字。
+                              `debug`  添加debug前缀和后缀。
+                              `domprops`  混淆那些鱼DOM属性名重复的名字。
+                              `keep_quoted`  只混淆没括起来的属性名。
+                              
+                              `regex`  只混淆匹配（该正则）的名字。
+                              `reserved`  不需要混淆的名字的列表（即保留）。
+  -b, --beautify [options]    是否美化输出（true/false）/指定输出配置：
+                              `beautify`  默认是启用.
+                              `preamble`  预设的输出文件头部。你可以插入一段注释，比如版权信息。它不会被解析，但sourcemap会因此调整。
+                              `quote_style`  括号类型:
+                                              0 - auto自动
+                                              1 - single单引号
+                                              2 - double双引号
+                                              3 - original跟随原码
+                              `wrap_iife`  把立即执行函数括起来。注意：你或许应禁用压缩配置中的`negate_iife`选项。 
+ 
+ -o, --output <file>         输出文件路径 (默认 STDOUT). 指定 `ast` 或
+                                `spidermonkey`的话分别是输出UglifyJS或SpiderMonkey AST。
+    --comments [filter]         保留版权注释。默认像Google Closure那样，保留包含"@license"或"@preserve"这样JSDoc风格的注释。你可以传以下的参数：
+                                - "all" 保留全部注释
+                                - 一个合适的正则，如 `/foo/` 或 `/^!/`，保留匹配到的注释。 
+                                注意，在启用压缩时，因为死代码被移除或压缩声明为一行，并非*所有*的注释都会被保留。
+    --config-file <file>        从此JSON文件读取 `minify()` 配置。
+    -d, --define <expr>[=value] 定义全局变量。
+    --ie8                       支持IE8。
+                                等同于在`minify()`的`compress`、 `mangle` 和 `output`配置设置`ie8: true`。UglifyJS不会默认兼容IE8。
+    --keep-fnames               不要混淆、干掉的函数的名字。当代码依赖Function.prototype.name时有用。
+    --name-cache <file>         用来保存混淆map的文件。
+    --self                      把UglifyJS本身也构建成一个依赖包
+                                (等同于`--wrap UglifyJS`)
+    --source-map [options]      启用 source map（true/false）/指定sourcemap配置:
+                                `base` 根路径，用于计算输入文件的相对路径。
+                                `content`  输入sourcemap。假如的你要编译的JS是另外的源码编译出来的。
+                                假如该sourcemap包含在js内，请指定"inline"。 
+                                `filename`  输出文件的名字或位置。
+                                `includeSources`  如果你要在sourcemap中加上源文件的内容作sourcesContent属性，就传这个参数吧。
+                                `root`  此路径中的源码编译后会产生sourcemap.
+                                `url`   如果指定此值，会添加sourcemap相对路径在`//#sourceMappingURL`中。
+    --timings                   在STDERR显示操作运行时间。
+    --toplevel                  压缩/混淆在最高作用域中声明的变量名。
+    --verbose                   打印诊断信息。
+    --warn                      打印警告信息。
+    --wrap <name>               把所有代码包裹在一个大函数中。让“exports”和“global”变量有效。
+                                你需要传一个参数来指定此模块的名字，以便浏览器引用。         
+ 
+```
+
+
 # xbin文件
  ![](docimg/img3.jpg)  
 
@@ -207,3 +320,6 @@ sdk.dir=D\:\\android\\sdk
 这样首个包比较小。这样不用等全部代码全部加载完成之后再出登录界面，体验会好很多。
 
 # 同图集适当合并排序到一层减少drawcall
+# chorme Performance性能调优相关  
+ ![](docimg/img5.jpg)  
+ 如果是大循环占用太久的问题引起的，拆成多帧分帧解析  
